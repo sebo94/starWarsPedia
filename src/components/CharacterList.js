@@ -1,13 +1,8 @@
 import React from 'react';
 import Character from './Character';
 
-function CharacterList({ characters }) {
-    // Testing ErrorBoundry
 
-    /*if(true) {
-        throw new Error("Fuck fuck fuck fuck!!!");
-    }*/
-    
+function CharacterList({ characters }){
     return(
         <div>
             {
@@ -23,5 +18,7 @@ function CharacterList({ characters }) {
         </div>
     );
 }
+
+
 
 export default CharacterList;
