@@ -2,9 +2,8 @@ import React from 'react';
 
 function Character({ name }) {
     const url = name.split(" ").join("_") + ".jpg";
-    const image = import(`./${url}`).then(image => image);
-    console.log(image);
-    const source = require(`./${url}`);
+    const image = import(`../images/${url}`).then(image => image);
+    const source = require(`../images//${url}`);
 
     return(
         <div className='tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5'>

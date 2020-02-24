@@ -13,50 +13,42 @@ class App extends React.Component {
         searchField: '',
         showList: false,
         page: 1,
-        toRender: 0
+        toRender: null
     }
-  }
-
-  handleScroll = e => {
-    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    if (bottom) {
-      this.loadUsers(this.state);
-    }
-  }
-
-  loadUsers = state => {
-    const { page, toRender, characters } = state;
-    if(page === 9) { console.log("fetcho l'ultimo troiaio") }
-
-    if(page === 1) {
-      fetch('https://swapi.co/api/people')
-      .then(response => response.json())
-      .then(data =>  this.setState({ 
-        characters: data.results,
-        page: page + 1,
-        toRender: Math.ceil(data.count / 10) 
-      }));
-    } else if (toRender >= 0) {
-      console.log("fetcho pagina " + page);
-      const url = `https://swapi.co/api/people/?page=${page}`;
-      fetch(url)
-        .then(response => response.json())
-        .then(data =>  this.setState({ 
-          characters: characters.concat(data.results),
-          page: page + 1,
-          toRender: toRender - 1
-      }));
-    }
- };
-
-  componentDidMount() {
-    this.loadUsers(this.state);
   }
 
   displayCharacters = () => {
     this.setState({
       showList: true 
     });
+  }
+
+  handleScroll = e => {
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) {
+      console.log("fetching users, to render " + this.state.toRender);
+      this.loadUsers(this.state);
+    } else if (this.state.toRender === 1) {
+      this.loadUsers(this.state);
+    }
+  }
+
+  loadUsers = state => {
+    const { page, toRender, characters } = state;
+    console.log(page, toRender)
+    if (toRender > 0 || toRender === null) {
+      fetch(`https://swapi.co/api/people/?page=${page}`)
+      .then(response => response.json())
+      .then(data =>  this.setState({ 
+        characters: characters.concat(data.results),
+        page: page + 1,
+        toRender: Math.ceil(data.count / 10 - page) 
+      }));
+    }
+ };
+
+  componentDidMount() {
+    this.loadUsers(this.state);
   }
 
   render() {
