@@ -1,19 +1,31 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300';
+@import 'https://fonts.googleapis.com/css?family=Krona+One&display=swap';
+
+/* GENERAL STYLING */
 
 html,
 body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    font-family: 'Open Sans Condensed', sans-serif;
-    background-color: #3C3C3C;
+	font-family: 'Open Sans Condensed', sans-serif;
+	background: #000 url(//cssanimation.rocks/demo/starwars/images/bg.jpg);
 }
+
+header {
+	color: yellow;
+	opacity: 0.8;
+}
+
+/* BUTTON BOX */
 
 div[class*=box] { 
     display: flex;
     justify-content: center;
-    background-color: #3C3C3C;
+	background: #000 url(//cssanimation.rocks/demo/starwars/images/bg.jpg);
 }
+
+/* BUTTON */
 
 .btn {
 	line-height: 50px;
@@ -28,6 +40,7 @@ div[class*=box] {
 	transition: all 0.5s;
 	position: relative;	
 }
+
 .btn-two span {
 	z-index: 2;	
 	display: block;
@@ -35,6 +48,7 @@ div[class*=box] {
 	width: 100%;
 	height: 100%;	
 }
+
 .btn-two::before {
 	content: '';
 	position: absolute;
@@ -45,8 +59,8 @@ div[class*=box] {
 	z-index: 1;
 	transition: all 0.5s;
 	border: 1px solid rgba(255,255,255,0.2);
-	background-color: rgba(255,255,255,0.1);
 }
+
 .btn-two::after {
 	content: '';
 	position: absolute;
@@ -57,17 +71,134 @@ div[class*=box] {
 	z-index: 1;
 	transition: all 0.5s;
 	border: 1px solid rgba(255,255,255,0.2);
-	background-color: rgba(255,255,255,0.1);
 }
+
 .btn-two:hover::before {
     transform: rotate(-45deg);
     background-color: rgba(255,255,255,0);
 }
+
 .btn-two:hover::after {
     transform: rotate(45deg);
     background-color: rgba(255,255,255,0);
 }
 
-header {
-    color: #FFF;
+/* MAKE THE 3D WORK ON THE CONTAINER */
+
+.starwars-demo {
+	perspective: 800px;
+	transform-style: preserve3d;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 17em;
+	left: 50%;
+	position: absolute;
+	top: 53%;
+	transform: translate(-50%, -50%);
+	width: 34em;
 }
+  
+img {
+	width: 100%;
+}
+  
+.star, .wars, .byline {
+	position: absolute;
+}
+  
+.star {
+	top: -0.75em;
+}
+  
+.wars {
+	bottom: -0.5em;
+}
+
+/* ANIMATION PROPERTIES */
+
+.star {
+	animation: star 10s ease-out infinite;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+
+}
+
+.wars {
+	animation: wars 10s ease-out infinite;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+
+}
+
+div[class*=box] { 
+	animation: button 10s ease-out infinite;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+  
+/* KEYFRAMES */
+
+@keyframes star {
+	0% {
+		opacity: 0;
+		transform: scale(1.5) translateY(-0.75em);
+	}
+	20% {
+		opacity: 1;
+	}
+	89% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: translateZ(-1000em);
+	}
+}
+  
+@keyframes wars {
+	0% {
+		opacity: 0;
+		transform: scale(1.5) translateY(0.5em);
+	}
+	20% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: translateZ(-1000em);
+	}
+}
+
+@keyframes button {
+	0% {
+		opacity: 0;
+	}
+	89% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/*** MEDIA QUERIES FOR ADJUSTING TO DIFFERENT SCREEN SIZES ***/
+  
+@media only screen and (max-width: 600px) {
+	.starwars-demo {
+	  font-size: 10px;
+	}
+}
+  
+@media only screen and (max-width: 480px) {
+	.starwars-demo {
+	  font-size: 7px;
+	}
+}
+  
+  

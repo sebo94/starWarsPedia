@@ -11,6 +11,7 @@ function CharacterList({ characters }){
                         <Character 
                             key={i}  
                             name={characters[i].name}
+                            style={{width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}
                         />
                     );
                 })
