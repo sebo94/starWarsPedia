@@ -1,5 +1,6 @@
 import React from 'react';
 import CharacterList from '../components/CharacterList';
+import CharacterInfo from '../components/CharacterInfo';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import ErrorBoundry from '../components/ErrorBoundry';
@@ -14,7 +15,7 @@ class App extends React.Component {
         showList: false,
         page: 1,
         toRender: null,
-        searchBar: "closed"
+        characterId: null
     }
   }
 
@@ -49,6 +50,10 @@ class App extends React.Component {
     });
   } 
 
+  showDetails = event => {
+    console.log(event);
+  }
+
   componentDidMount() {
     this.loadUsers(this.state);
   }
@@ -64,10 +69,15 @@ class App extends React.Component {
 
     return (
       <div>
-        {/*Semantic HTML biatch*/}
+        {/* SEMANTIC HTML BIATCH */}
         <main className="tc ma6">
+        <h1><span className="text_1">I'm a dynamic heading</span></h1>
+
         {
           !this.state.showList ?
+
+          /* INTRO */
+
           <div className="starwars-demo">
             <img src="//cssanimation.rocks/demo/starwars/images/star.svg" alt="Star" className="star" />
             <img src="//cssanimation.rocks/demo/starwars/images/wars.svg" alt="Wars" className="wars" />
@@ -77,6 +87,9 @@ class App extends React.Component {
               </div>
             </div>
           </div>
+
+          /* MAIN CONTENT */
+
           :
           <div onScroll={this.handleScroll}>
             <SearchBox searchChange={this.onSearchChange}/>
@@ -85,8 +98,10 @@ class App extends React.Component {
                 <CharacterList characters={filteredCharacters}/>
               </ErrorBoundry>
             </Scroll>
+            <CharacterInfo infos={filteredCharacters[this.state.characterId]} showDetails={this.showDetails}/>
           </div>
         }
+
         </main>
       </div>
     );

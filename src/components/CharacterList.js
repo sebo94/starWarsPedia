@@ -2,7 +2,7 @@ import React from 'react';
 import Character from './Character';
 
 
-function CharacterList({ characters }){
+function CharacterList({ characters }) {
     return(
         <div>
             {
@@ -10,7 +10,7 @@ function CharacterList({ characters }){
                     return (
                         <Character 
                             key={i}  
-                            name={characters[i].name}
+                            infos={characters[i]}
                             style={{width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}
                         />
                     );
