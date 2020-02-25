@@ -2,7 +2,7 @@ import React from 'react';
 import Character from './Character';
 
 
-function CharacterList({ characters }) {
+function CharacterList({ characters, showDetails }) {
     return(
         <div>
             {
@@ -12,6 +12,7 @@ function CharacterList({ characters }) {
                             key={i}  
                             infos={characters[i]}
                             style={{width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+                            showDetails={showDetails}
                         />
                     );
                 })

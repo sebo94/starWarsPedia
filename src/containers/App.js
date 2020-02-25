@@ -15,7 +15,7 @@ class App extends React.Component {
         showList: false,
         page: 1,
         toRender: null,
-        characterId: null
+        characterName: '',
     }
   }
 
@@ -50,8 +50,10 @@ class App extends React.Component {
     });
   } 
 
-  showDetails = event => {
-    console.log(event);
+  showDetails = (event) => {
+    this.setState({
+      characterName: event.target.alt
+    });
   }
 
   componentDidMount() {
@@ -59,10 +61,10 @@ class App extends React.Component {
   }
 
   render() {
-
+    
     /* FILTERING CHARACTERS */
 
-    const { characters, searchField } = this.state;
+    const { characters, searchField, characterName } = this.state;
     const filteredCharacters = characters.filter(character => {
       return character.name.toLocaleLowerCase().includes(searchField.toLocaleLowerCase())
     });
@@ -95,10 +97,10 @@ class App extends React.Component {
             <SearchBox searchChange={this.onSearchChange}/>
             <Scroll >
               <ErrorBoundry>
-                <CharacterList characters={filteredCharacters}/>
+                <CharacterList characters={filteredCharacters} showDetails={this.showDetails}/>
               </ErrorBoundry>
             </Scroll>
-            <CharacterInfo infos={filteredCharacters[this.state.characterId]} showDetails={this.showDetails}/>
+            <CharacterInfo infos={filteredCharacters.filter(characterObj => characterObj.name === characterName )}/>
           </div>
         }
 
