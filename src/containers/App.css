@@ -19,6 +19,13 @@ header {
 	animation-iteration-count: 1;
 }
 
+.main_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 /* BUTTON BOX */
 
 div[class*=box] { 

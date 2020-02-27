@@ -61,19 +61,18 @@ class App extends React.Component {
   }
 
   render() {
-    
     /* FILTERING CHARACTERS */
 
     const { characters, searchField, characterName } = this.state;
     const filteredCharacters = characters.filter(character => {
       return character.name.toLocaleLowerCase().includes(searchField.toLocaleLowerCase())
     });
-
+    const infos = this.state.characters.filter(character => character.name === characterName);
     return (
       <div>
         {/* SEMANTIC HTML BIATCH */}
         <main className="tc ma6">
-        <h1><span className="text_1">I'm a dynamic heading</span></h1>
+        
 
         {
           !this.state.showList ?
@@ -93,14 +92,14 @@ class App extends React.Component {
           /* MAIN CONTENT */
 
           :
-          <div onScroll={this.handleScroll}>
+          <div className='main_content pa5' onScroll={this.handleScroll}>
             <SearchBox searchChange={this.onSearchChange}/>
             <Scroll >
               <ErrorBoundry>
                 <CharacterList characters={filteredCharacters} showDetails={this.showDetails}/>
               </ErrorBoundry>
             </Scroll>
-            <CharacterInfo infos={filteredCharacters.filter(characterObj => characterObj.name === characterName )}/>
+            <CharacterInfo infos={infos[0]}/>
           </div>
         }
 
